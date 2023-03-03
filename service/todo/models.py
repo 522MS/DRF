@@ -4,6 +4,8 @@ from users.models import User
 
 
 class Project(models.Model):
+    def __str__(self):
+        return self.name
     class Meta:
         verbose_name = 'проект'
         verbose_name_plural = 'проекты'
