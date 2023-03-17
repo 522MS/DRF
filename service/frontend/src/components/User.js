@@ -1,43 +1,31 @@
 import React from 'react';
+import { Table } from 'antd';
 
-const UserItem = ({user}) => {
-    return (
-        <tr>
-            <td>
-                {user.username}
-            </td>
-            <td>
-                {user.first_name}
-            </td>
-            <td>
-                {user.last_name}
-            </td>
-            <td>
-                {user.email}
-            </td>
-        </tr>
-    )
-}
+const columns = [
+  {
+    title: 'Username',
+    dataIndex: 'username',
+    key: 'username',
+  },
+  {
+    title: 'First name',
+    dataIndex: 'first_name',
+    key: 'first_name',
+  },
+  {
+    title: 'Last name',
+    dataIndex: 'last_name',
+    key: 'last_name',
+  },
+  {
+    title: 'Email',
+    key: 'email',
+    dataIndex: 'email',
+  },
+];
 
 
-const UserList = ({users}) => {
-    return (
-        <table>
-            <th>
-                User name
-            </th>
-            <th>
-                First name
-            </th>
-            <th>
-                Last name
-            </th>
-            <th>
-                Email
-            </th>
-            {users.map((user) => <UserItem user={user} />)}
-        </table>
-    )
-}
+const UserList = ({users}) => <Table columns={columns} dataSource={users} />;
+
 
 export default UserList;
