@@ -1,50 +1,46 @@
-import { Menu } from 'antd';
-import { useState } from 'react';
-import { Link } from "react-router-dom";
+import React from "react";
+import {Link} from "react-router-dom";
+import {Menu, Row, Col, Button} from 'antd'
+import {
+    PushpinOutlined,
+    FundProjectionScreenOutlined,
+    UserOutlined,
+    SnippetsOutlined,
+    LoginOutlined
+} from '@ant-design/icons';
 
-const items = [
-  {
-    label: (
-      <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-        <Link to='/'>Главная</Link>
-      </a>
-    ),
-    key: '1',
-  },
-  {
-    label: (
-      <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-        <Link to='/users'>Пользователи</Link>
-      </a>
-    ),
-    key: '2',
-  },
-  {
-    label: (
-      <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-        <Link to='/projects'>Проекты</Link>
-      </a>
-    ),
-    key: '3',
-  },
-  {
-    label: (
-      <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-        <Link to='/todo'>ToDo</Link>
-      </a>
-    ),
-    key: '4',
-  },
-];
 
-const App = () => {
-  const [current, setCurrent] = useState('mail');
-  const onClick = (e) => {
-    console.log('click ', e);
-    setCurrent(e.key);
-  };
-  return <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />;
-};
-export default App;
+const MenuContent = (props) => {
+    const is_authenticated = props.is_authenticated();
+
+    return (
+        <Row>
+            <Col xs={24} md={{span: 16, offset: 4}}>
+                <nav>
+                    <Menu mode="horizontal">
+                        <Menu.Item key="main" icon={<PushpinOutlined/>}>
+                            <Link to='/'>Главная</Link>
+                        </Menu.Item>
+                        <Menu.Item key="projects" icon={<FundProjectionScreenOutlined/>}>
+                            <Link to='/projects'>Список проектов</Link>
+                        </Menu.Item>
+                        <Menu.Item key="todo" icon={<SnippetsOutlined/>}>
+                            <Link to='/todo'>Список заметок</Link>
+                        </Menu.Item>
+                        <Menu.Item key="users" icon={<UserOutlined/>}>
+                            <Link to='/users'>Пользователи</Link>
+                        </Menu.Item>
+                        <Menu.Item key="login" icon={<LoginOutlined/>}>
+                            {is_authenticated ? <Button type="text" onClick={() => props.logout()}>Выйти </Button> : <Link to='/login'>Войти</Link>}
+                        </Menu.Item>
+                    </Menu>
+                </nav>
+            </Col>
+        </Row>
+    )
+
+}
+
+export default MenuContent;
 
 

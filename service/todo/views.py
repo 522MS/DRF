@@ -11,7 +11,7 @@ class ProjectLimitOffsetPagination(LimitOffsetPagination):
 
 
 class TodoLimitOffsetPagination(LimitOffsetPagination):
-    default_limit = 1
+    default_limit = 2
 
 
 class ProjectModelViewSet(ModelViewSet):
